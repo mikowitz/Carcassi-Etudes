@@ -1,4 +1,5 @@
 guitarVoiceOne = \relative c' {
+  \formatFingering
   \voiceOne
   c8 c' b a g f e d |
   c e' d c b a g f |
@@ -8,12 +9,12 @@ guitarVoiceOne = \relative c' {
   g b' a g fs e d c |
   b d' c b a g f! e |
   d c b a g f' e d |
-  c c' d e f g a b |
-  c b a g f e d c | 
+  c c' d e f_\startStringNumberSpanner "2" #DOWN g\stopTextSpan a_\startStringNumberSpanner "1" #DOWN b |
+  c b a\stopTextSpan g_\startStringNumberSpanner "2" #DOWN f\stopTextSpan e d c | 
   b r8 r4 r2 |
   R1 |
   a,8 a' b c d e fs gs |
-  a g! f! e f e d c |
+  a g! <f!_\2> e f e d c |
   b r8 r4 r2 |
   R1
   c,8 c' d e f e d c |
@@ -28,17 +29,17 @@ guitarVoiceOne = \relative c' {
   d e f e d c b a |
   g, g' a b c d e f |
   g r8 r4 r2 |
-  c,,8 g' c e g, b d g |
-  c, e g c g, b d g |
-  c,, g' c e fs, c' ds a' |
-  g, c e g g, d' f b |
-  c, e g c g, b d g |
+  c,,8 <g'_\4> <c_\3> e <g,_\4>\halfBarre "III" #UP b d g\stopBarre |
+  <c,_\4>\halfBarre "VIII" #UP e g c\stopBarre g,\halfBarre "III" #UP b d g\stopBarre |
+  c,, <g'_\4> <c_\3> e fs, c' ds a' |
+  <g,_\4> c e g g, d' f b |
+  c,\halfBarre "VIII" #UP e g c\stopBarre g,\halfBarre "III" #UP b d g\stopBarre |
   c,, g' c e b, e gs d' |
   a, e' a c f,, f' a d |
   g,, e' g c g, d' g b |
   c c, d e f g a b |
-  c, c' d e f g a b |
-  c, c' b a g f e d |
+  c, c' d e f_\startStringNumberSpanner "2" #DOWN g\stopTextSpan a b |
+  <c,_\3> c' b a g_\startStringNumberSpanner #"2" #DOWN f\stopTextSpan \sfu <e-0> <d-4> |
   c, c' b a g f e d |
   c4 r4 r2 |
   <e g c>4 r <g c e> r |

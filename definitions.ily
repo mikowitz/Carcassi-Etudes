@@ -81,16 +81,19 @@ stringNumberSpanner =
      \once\override TextSpanner.bound-details.right.padding = #-2
    #})
 
+startStringNumberSpanner =
+#(define-music-function (parser location string-number dir) (string? number?)
+     (let ((end-direction (if (positive? dir) '(0 . -1) '(0 . 1))))
+         #{
 
-barre = {
-  \once \override TextSpanner.style = #'line
-  \once \override TextSpanner.font-shape = #'upright
-  \once\override TextSpanner.bound-details.left.padding = #-1
-  \once\override TextSpanner.bound-details.right.padding = #-1
-  \once\override TextSpanner.bound-details.right-broken.text = ""
-  \once\override TextSpanner.bound-details.left-broken.text = ""
-  \once\override TextSpanner.bound-details.right.text = \markup { \draw-line #'(0 . -1) }
-}
+     \tweak style #'solid
+     \tweak font-size #-5
+     \tweak bound-details.left.stencil-align-dir-y #CENTER
+     \tweak bound-details.left.text \markup { \circle \number $string-number \hspace #.667 }
+     \tweak bound-details.right.text \markup { \draw-line $end-direction }
+     \tweak TextSpanner.bound-details.right.padding #-2
+     \startTextSpan
+   #}))
 
 halfBarre = #(define-event-function (parser location fret dir) (string? number?)
                #{
@@ -109,7 +112,7 @@ startBarre = #(define-event-function (parser location fret dir) (string? number?
                      #{
                        \tweak style #'line
                        \tweak font-shape #'upright
-                       \tweak bound-details.left.padding #-1
+                       \tweak bound-details.left.padding #0
                        \tweak bound-details.right.padding #-1
                        \tweak bound-details.right-broken.text ""
                        \tweak bound-details.left-broken.text ""
