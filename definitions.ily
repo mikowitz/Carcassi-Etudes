@@ -1,6 +1,8 @@
 \version "2.22.0"
 \language "english"
 
+#(set-global-staff-size 18)
+
 \paper {
   #(set-paper-size "arch a")
   %system-system-spacing.minimum-distance = #23
@@ -29,8 +31,9 @@
 }
 formatFingering = {
   \set fingeringOrientations = #'(left)
+  \override Fingering.font-name = #"Liberation Serif, Bold"
   \override Fingering.whiteout = ##t
-  \override Fingering.font-size = #-7
+  \override Fingering.font-size = #-4
 }
 
 shiftFingering = #(define-music-function (direction music) (number? ly:music?)
@@ -83,14 +86,16 @@ stringNumberSpanner =
 
 startStringNumberSpanner =
 #(define-music-function (parser location string-number dir) (string? number?)
-     (let ((end-direction (if (positive? dir) '(0 . -1) '(0 . 1))))
+     (let ((end-direction (if (positive? dir) '(0 . -.5) '(0 . .5))))
          #{
 
      \tweak style #'solid
      \tweak font-size #-5
      \tweak bound-details.left.stencil-align-dir-y #CENTER
-     \tweak bound-details.left.text \markup { \circle \number $string-number \hspace #.667 }
+     \tweak bound-details.left.text \markup { \override #'(font-name . "Liberation Serif, Bold") \fontsize #2 \circle \number $string-number \hspace #.667 }
      \tweak bound-details.right.text \markup { \draw-line $end-direction }
+                            \tweak bound-details.right-broken.text ""
+                       \tweak bound-details.left-broken.text ""
      \tweak TextSpanner.bound-details.right.padding #-2
      \startTextSpan
    #}))
@@ -122,3 +127,20 @@ startBarre = #(define-event-function (parser location fret dir) (string? number?
                      #}))
 
 stopBarre = \stopTextSpan
+
+lowerRest = { \once\override Rest.extra-offset = #'(0 . -1) }
+
+\layout {
+  \context {
+    \Staff
+    \override StringNumber.font-name = #"Liberation Serif, Bold"
+    \override StringNumber.whiteout = ##t
+    \override StringNumber.font-size = #-3
+
+  }
+  
+  \context {
+    \Voice
+    \override TextSpanner.font-name = #"Liberation Serif"
+  }
+}
