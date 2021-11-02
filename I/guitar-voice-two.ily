@@ -44,7 +44,11 @@ guitarVoiceTwo = \relative c' {
   c'8 s8 s4 s2 |
   c,4 r4 r2 |
   c'4 r4 r2 |
-  c,4 r4 r2 |
+  c,4 
+  \lowerRest
+  r4 
+  \lowerRest
+  r2 |
   s4 r4 r2 |
   c4 r c4 r |
   c2 r |
